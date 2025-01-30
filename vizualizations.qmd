@@ -1,0 +1,15 @@
+# data
+
+{}
+```{r}
+library(tidyverse)
+```
+
+```{r}
+```
+
+```{r}
+load("C:\Users\Alex\Documents\GitHub\WECC\2000-2020-rexburg.csv")
+```
+
+
