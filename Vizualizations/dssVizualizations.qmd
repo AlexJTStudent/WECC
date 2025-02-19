@@ -16,11 +16,7 @@ library(ggthemes)
 ```
 
 ```{r}
-temp = tempfile()
-
-download("https://raw.githubusercontent.com/BYUIDSS/DSS_F24_WECC/refs/heads/master/rexburgData/2000-2020-rexburg.csv?token=GHSAT0AAAAAAC4WJUQN4AK6L3BPDGYN4DOCZ5NLNHQ", dest = temp, mode = "wb")
-
-data <- read.csv(temp)
+data <- read.csv("C:\\Users\\Alex\\Documents\\GitHub\\WECC\\2000-2020-rexburg.csv")
 
 data <- data %>%
   rename(Temperature_f = Temperature..F.,
