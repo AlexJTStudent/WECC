@@ -1,0 +1,79 @@
+---
+title: "DSSVizualizations"
+format: html
+editor: visual
+execute:
+  keep-md: TRUE
+---
+
+```{r}
+library(tidyverse)
+library(mosaic)
+library(rio)
+library(downloader)
+library(ggthemes)
+
+```
+
+```{r}
+temp = tempfile()
+
+download("https://raw.githubusercontent.com/BYUIDSS/DSS_F24_WECC/refs/heads/master/rexburgData/2000-2020-rexburg.csv?token=GHSAT0AAAAAAC4WJUQN4AK6L3BPDGYN4DOCZ5NLNHQ", dest = temp, mode = "wb")
+
+data <- read.csv(temp)
+
+data <- data %>%
+  rename(Temperature_f = Temperature..F.,
+         Precipitation_in = Precipitation..inches.,
+         Pressure_mb = Pressure..mb.,
+         Wind_Speed = Wind.Speed..mph.)
+
+```
+
+```{r}
+ggplot(data, mapping = aes(x= Humidity, y = Wind_Speed, col)) + 
+geom_point() +
+geom_smooth() +
+labs(title = "Precipitation & Humidity Trend",
+        y = "Precipitation (inches)") +
+  theme_economist()
+```
+
+```{r}
+ggplot(data, mapping = aes(x = Pressure_mb)) + 
+  geom_histogram() + 
+  labs(title = "Pressure Distribution",
+       x = "Pressure (millibar)",
+       y = "") + 
+  theme_igray()
+```
+
+```{r}
+ggplot(data, mapping = aes(x = Wind_Speed)) + 
+geom_histogram() + 
+labs(title = "Wind Speed Distribution",
+     x = "Wind Speed (Miles per Hour)",
+     y = "") +
+  theme_wsj()
+```
+
+```{r}
+ggplot(data, mapping = aes(x = Temperature_f, y = Pressure_mb)) + geom_point() +
+geom_hex()+
+geom_smooth(color = "purple") +
+theme_gray()+
+labs(title = "Temperature & Pressure Trend",
+     x = "Temperature(F)",
+     y = "Pressure") +
+  theme_pander()
+```
+
+The temperature and pressure features of the data show
+
+```{r}
+ggplot(data, mapping = aes(x = Humidity, y = Precipitation_in)) + 
+geom_point() +
+  labs(title = "Humidity & Precipitation Trends",
+       y = "Precipitation (Inches)") +
+  theme_solarized()
+```
